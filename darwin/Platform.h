@@ -15,6 +15,7 @@ in the source distribution for its full text.
 #include "CPUMeter.h"
 #include "BatteryMeter.h"
 #include "DarwinProcess.h"
+#include "SignalsPanel.h"
 
 #ifndef CLAMP
 #define CLAMP(x,low,high) (((x)>(high))?(high):(((x)<(low))?(low):(x)))

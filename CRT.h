@@ -114,8 +114,16 @@ typedef enum ColorElements_ {
    CPU_IOWAIT,
    CPU_IRQ,
    CPU_SOFTIRQ,
+   CPU_TEMP,
+   CPU_TEMP_HOT,
+   CPU_TEMP_WARM,
+   CPU_TEMP_NORMAL,
    CPU_STEAL,
    CPU_GUEST,
+   FAN_RPM,
+   FAN_RPM_HOT,
+   FAN_RPM_WARM,
+   FAN_RPM_NORMAL,
    LAST_COLORELEMENT
 } ColorElements;
 

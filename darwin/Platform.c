@@ -8,6 +8,8 @@ in the source distribution for its full text.
 
 #include "Platform.h"
 #include "CPUMeter.h"
+#include "CPUTemperatureMeter.h"
+#include "FanRPMMeter.h"
 #include "MemoryMeter.h"
 #include "SwapMeter.h"
 #include "TasksMeter.h"
@@ -25,6 +27,7 @@ in the source distribution for its full text.
 #include "CPUMeter.h"
 #include "BatteryMeter.h"
 #include "DarwinProcess.h"
+#include "SignalsPanel.h"
 }*/
 
 #ifndef CLAMP
@@ -102,6 +105,8 @@ ProcessFieldData Process_fields[] = {
 
 MeterClass* Platform_meterTypes[] = {
    &CPUMeter_class,
+   &CPUTemperatureMeter_class,
+   &FanRPMMeter_class,
    &ClockMeter_class,
    &LoadAverageMeter_class,
    &LoadMeter_class,

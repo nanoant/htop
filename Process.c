@@ -315,27 +315,31 @@ void Process_printTime(RichString* str, unsigned long long totalHundredths) {
 }
 
 static inline void Process_writeCommand(Process* this, int attr, int baseattr, RichString* str) {
-   int start = RichString_size(str), finish = 0;
+   int start = 0, finish = 0;
    char* comm = this->comm;
 
    if (this->settings->highlightBaseName || !this->settings->showProgramPath) {
-      int i, basename = 0;
-      for (i = 0; i < this->basenameOffset; i++) {
-         if (comm[i] == '/') {
-            basename = i + 1;
-         } else if (comm[i] == ':') {
-            finish = i + 1;
-            break;
+      start = RichString_size(str);
+      finish = start - 1;
+      if (this->basenameOffset != -1) {
+         finish = (start + this->basenameOffset) - 1;
+      }
+      int colon = RichString_findChar(str, ':', start);
+      if (colon != -1 && colon < finish) {
+         finish = colon;
+      } else {
+         for (int i = finish - start; i >= 0; i--) {
+            if (this->comm[i] == '/') {
+               if (!this->settings->showProgramPath) {
+                  comm += i+1;
+                  finish -= i+1;
+               } else {
+                  start += i+1;
+               }
+               break;
+            }
          }
       }
-      if (!finish) {
-         if (this->settings->showProgramPath)
-            start += basename;
-         else
-            comm += basename;
-         finish = this->basenameOffset - basename;
-      }
-      finish += start - 1;
    }
 
    RichString_append(str, attr, comm);

@@ -24,7 +24,7 @@ BatteryMeter.c Process.c ProcessList.c RichString.c ScreenManager.c Settings.c \
 SignalsPanel.c StringUtils.c SwapMeter.c TasksMeter.c UptimeMeter.c \
 TraceScreen.c UsersTable.c Vector.c AvailableColumnsPanel.c AffinityPanel.c \
 HostnameMeter.c OpenFilesScreen.c Affinity.c IncSet.c Action.c EnvScreen.c \
-InfoScreen.c XAlloc.c
+InfoScreen.c XAlloc.c CPUTemperatureMeter.c FanRPMMeter.c
 
 myhtopheaders = AvailableColumnsPanel.h AvailableMetersPanel.h \
 CategoriesPanel.h CheckItem.h ClockMeter.h ColorsPanel.h ColumnsPanel.h \
@@ -34,7 +34,7 @@ BatteryMeter.h Meter.h MetersPanel.h Object.h Panel.h ProcessList.h RichString.h
 ScreenManager.h Settings.h SignalsPanel.h StringUtils.h SwapMeter.h \
 TasksMeter.h UptimeMeter.h TraceScreen.h UsersTable.h Vector.h Process.h \
 AffinityPanel.h HostnameMeter.h OpenFilesScreen.h Affinity.h IncSet.h Action.h \
-EnvScreen.h InfoScreen.h XAlloc.h
+EnvScreen.h InfoScreen.h XAlloc.h CPUTemperatureMeter.h FanRPMMeter.h
 
 all_platform_headers =
 
@@ -126,14 +126,18 @@ darwin_platform_headers = \
 	darwin/DarwinProcess.h \
 	darwin/DarwinProcessList.h \
 	darwin/DarwinCRT.h \
-	darwin/Battery.h
+	darwin/Battery.h \
+	darwin/CPUTemperature.h \
+	darwin/FanRPM.h \
+	darwin/smc.h
 
 all_platform_headers += $(darwin_platform_headers)
 
 if HTOP_DARWIN
 AM_LDFLAGS += -framework IOKit -framework CoreFoundation
 myhtopplatsources = darwin/Platform.c darwin/DarwinProcess.c \
-darwin/DarwinProcessList.c darwin/DarwinCRT.c darwin/Battery.c
+darwin/DarwinProcessList.c darwin/DarwinCRT.c darwin/Battery.c \
+darwin/CPUTemperature.c darwin/FanRPM.c darwin/smc.c
 
 myhtopplatheaders = $(darwin_platform_headers)
 endif
